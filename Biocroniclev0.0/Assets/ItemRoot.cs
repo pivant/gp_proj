@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Item
 {
     public enum TYPE // 아이템종류
@@ -16,6 +17,22 @@ public class Item
 
 public class ItemRoot : MonoBehaviour
 {
+
+    public GameObject ironPrefab = null;    //프리팹 iron
+    public GameObject plantPrefab = null;   //프리팹 plant
+    public GameObject applePrefab = null;   //프리팹 apple
+
+    protected List<Vector3> respawn_points; //출현지점 list
+
+    public float step_timer = 0.0f;         //
+    public static float RESPAWN_TIME_APPLE = 20.0f;     //사과 출현 시간 상수
+    public static float RESPAWN_TIME_IRON = 12.0f;     //철광석 출현 시간 상수
+    public static float RESPAWN_TIME_PLANT = 6.0f;     //식물 출현 시간 상수
+    public static float respawn_timer_apple = 0.0f;     //사과 출현 시간 
+    public static float respawn_timer_iron = 0.0f;     //철광석 출현 시간 
+    public static float respawn_timer_plant = 0.0f;     //식물 출현 시간 
+
+
     //아이템 종류를 item.TYPE로 반환하는 메서드.
     public Item.TYPE getItemType(GameObject item_go)
     {
