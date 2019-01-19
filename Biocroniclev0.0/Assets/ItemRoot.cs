@@ -49,6 +49,65 @@ public class ItemRoot : MonoBehaviour
 
         return (type);
     }
+
+    public void respawnIron()
+    {
+        //철광석 프리팹을 인스턴스화
+        GameObject go =
+            GameObject.Instantiate(this.ironPrefab) as GameObject;
+
+        //철광석의 출현 지점을 취득.
+        Vector3 pos = GameObject.Find("IronRespawn").transform.position;
+
+        //출현 위치를 조정.
+        pos.y = 1.0f;
+        pos.x += Random.Range(-1.0f, -1.0f);
+        pos.z += Random.Range(-1.0f, -1.0f);
+
+        //철광석의 위치를 이동
+        go.transform.position = pos;
+    }
+
+    public void respawnApple()
+    {
+        //사과 프리팹을 인스턴스화
+        GameObject go =
+            GameObject.Instantiate(this.applePrefab) as GameObject;
+
+        //철광석의 출현 지점을 취득.
+        Vector3 pos = GameObject.Find("AppleRespawn").transform.position;
+
+        //출현 위치를 조정.
+        pos.y = 1.0f;
+        pos.x += Random.Range(-1.0f, -1.0f);
+        pos.z += Random.Range(-1.0f, -1.0f);
+
+        //철광석의 위치를 이동
+        go.transform.position = pos;
+    }
+
+    public void respawnPlant()
+    {
+        if(this.respawn_points.Count>0)
+        {
+            //식물 프리팹을 인스턴스화
+            GameObject go =
+                GameObject.Instantiate(this.plantPrefab) as GameObject;
+
+            //식물의 출현 지점을 랜덤하게 취득.
+            int n = Random.Range(0, this.respawn_points.Count);
+
+            Vector3 pos = this.respawn_points[n];
+
+            //출현 위치를 조정.
+            pos.y = 1.0f;
+            pos.x += Random.Range(-1.0f, -1.0f);
+            pos.z += Random.Range(-1.0f, -1.0f);
+
+            //철광석의 위치를 이동
+            go.transform.position = pos;
+        }
+    }
     
     // Start is called before the first frame update
     void Start()
