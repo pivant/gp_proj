@@ -112,12 +112,66 @@ public class ItemRoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // 메모리 영역확보.
+        this.respawn_points = new List<Vector3>();
+
+        // 플랜트 리스폰 태그가 붙은 모든 오브젝트를 배열에 저장
+        GameObject[] respawn =
+            GameObject.FindGameObjectWithTag("PlantRespawn");
+
+        //배열 리스폰 내의 각 게임오브젝트를 순서대로 처리
+        foreach(GameObject go in respawn)
+        {
+            //렌더러 획득
+            MeshRenderer renderer = go.GetComponentInChildren<MeshRenderer>();
+            if(renderer != null) // 렌더러가 존재하면
+            {
+                renderer.enabled = false; // 그렌더러를 보이지 않게
+            }
+
+            //출현지점 리스트에 위치정보를 추가
+            this.respawn_points.Add(go.transform.position);
+        }
+
+        //사과의 출현지점을 취득하고 렌더러를 보이지 않게.
+        GameObject applerespawn = GameObject.Find("AppleRespawn");
+        applerespawn.GetComponent<MeshRenderer>().enabled = false;
+
+        //철광석의 출현지점을 취득하고 렌더러를 보이지 않게.
+        GameObject ironrespawn = GameObject.Find("IronRespawn");
+        ironrespawn.GetComponent<MeshRenderer>().enabled = false;
+
+        this.respawnIron();     //철광석을 하나 생성
+        this.respawnPlant();    //식물을 하나 생성
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        respawn_timer_apple += Time.deltatime;
+        respawn_timer_iron += Time.deltatime;
+        respawn_timer_plant += Time.deltatime;
+
+        if(respawn_timer_apple> RESPAWN_TIME_APPLE)
+        {
+            respawn_timer_apple = 0.0f;
+            this.respawnApple(); // 사과를 출현시킨다
+        }
+
+        if (respawn_timer_iron > RESPAWN_TIME_IRON)
+        {
+            respawn_timer_iron = 0.0f;
+            this.respawnIron(); // 철광석을 출현시킨다
+        }
+
+        if (respawn_timer_plant > RESPAWN_TIME_PLANT)
+        {
+            respawn_timer_plant = 0.0f;
+            this.respawnPlant(); // 식물을 출현시킨다
+        }
+
+
     }
 }
