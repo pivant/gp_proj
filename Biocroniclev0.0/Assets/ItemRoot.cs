@@ -117,7 +117,7 @@ public class ItemRoot : MonoBehaviour
 
         // 플랜트 리스폰 태그가 붙은 모든 오브젝트를 배열에 저장
         GameObject[] respawn =
-            GameObject.FindGameObjectWithTag("PlantRespawn");
+            GameObject.FindGameObjectsWithTag("PlantRespawn");
 
         //배열 리스폰 내의 각 게임오브젝트를 순서대로 처리
         foreach(GameObject go in respawn)
@@ -150,9 +150,9 @@ public class ItemRoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        respawn_timer_apple += Time.deltatime;
-        respawn_timer_iron += Time.deltatime;
-        respawn_timer_plant += Time.deltatime;
+        respawn_timer_apple += Time.deltaTime;
+        respawn_timer_iron += Time.deltaTime;
+        respawn_timer_plant += Time.deltaTime;
 
         if(respawn_timer_apple> RESPAWN_TIME_APPLE)
         {
